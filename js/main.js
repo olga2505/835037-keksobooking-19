@@ -69,8 +69,8 @@ var createAdvertisements = function (length) {
 
       },
       'location': {
-        'x': locationX,
-        'y': locationY
+        'x': locationX - PIN_WIDTH / 2,
+        'y': locationY - PIN_HEIGHT
 
       }
     };
