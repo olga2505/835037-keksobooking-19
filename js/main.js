@@ -32,6 +32,7 @@ var shuffleArray = function (array) {
     var temp = tempArray[i];
     tempArray[i] = tempArray[j];
     tempArray[j] = temp;
+
   }
   return tempArray;
 };
@@ -41,8 +42,8 @@ var getRandomSet = function (array) {
 };
 
 var createAdvertisements = function (length) {
-  var LOCATION_X_MIN = 0;
-  var LOCATION_X_MAX = 1200;
+  var LOCATION_X_MIN = PIN_WIDTH / 2;
+  var LOCATION_X_MAX = 1200 - PIN_WIDTH / 2;
   var LOCATION_Y_MIN = 130;
   var LOCATION_Y_MAX = 630;
 
@@ -71,7 +72,6 @@ var createAdvertisements = function (length) {
       'location': {
         'x': locationX - PIN_WIDTH / 2,
         'y': locationY - PIN_HEIGHT
-
       }
     };
     ads.push(characteristics);
@@ -81,7 +81,7 @@ var createAdvertisements = function (length) {
 };
 
 var renderPin = function (pin) {
-  var pinTemplate = document.querySelector('#pin').content;
+  var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var pinElement = pinTemplate.cloneNode(true);
   pinElement.style.left = pin.location.x + 'px';
   pinElement.style.top = pin.location.y + 'px';
@@ -92,7 +92,7 @@ var renderPin = function (pin) {
 var renderPins = function (pins) {
   var fragment = document.createDocumentFragment();
   pins.forEach(function (pin) {
-    fragment.appendChild(renderPin(pin))
+    fragment.appendChild(renderPin(pin));
   });
   map.appendChild(fragment);
 };
