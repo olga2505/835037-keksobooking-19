@@ -160,16 +160,7 @@ var renderAd = function (item) { // показ объявлений___________
   return adsElement;
 };
 
-var renderAds = function (items) {
-  var fragmentAds = document.createDocumentFragment();
-  items.forEach(function (item) {
-    fragmentAds.appendChild(renderAd(item));
-  });
-  mapPins.appendChild(fragmentAds);
+var renderAdvertisement = function (item) {
+  map.insertBefore(renderAd(item), document.querySelector('.map__filters-container'));
 };
-renderAds(offers);
-
-// var renderAdvertisement = function (item) {
-//   map.insertBefore(renderAd(item), document.querySelector('.map__filters-container'));
-// };
-// renderAdvertisement();
+renderAdvertisement(offers[0]);
