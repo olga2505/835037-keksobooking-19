@@ -143,7 +143,7 @@ var renderFeature = function (feature) { // функция для li_______
   return featureElement;
 };
 
-var renderFeaturs = function (features) {
+var renderFeatures = function (features) {
   var fragment = document.createDocumentFragment();
   features.forEach(function (feature) {
     fragment.appendChild(renderFeature(feature));
@@ -181,11 +181,11 @@ var renderAd = function (item) { // показ объявлений___________
   adsElement.querySelector('.popup__title').textContent = item.offer.title;
   adsElement.querySelector('.popup__text--address').textContent = item.offer.address;
   adsElement.querySelector('.popup__text--price').textContent = item.offer.price + ' ₽/ночь';
-  adsElement.querySelector('.popup__type').textContent = dictionaryListMap [item.offer.type];
+  adsElement.querySelector('.popup__type').textContent = dictionaryListMap[item.offer.type];
   adsElement.querySelector('.popup__text--capacity').textContent = quantityRoomsGuest;
   adsElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + item.offer.checkin + ', выезд до ' + item.offer.checkout;
   adsElement.querySelector('.popup__features').innerHTML = '';
-  adsElement.querySelector('.popup__features').appendChild(renderFeaturs(item.offer.features));
+  adsElement.querySelector('.popup__features').appendChild(renderFeatures(item.offer.features));
   adsElement.querySelector('.popup__description').textContent = item.offer.description;
   adsElement.querySelector('.popup__photos').innerHTML = '';
   adsElement.querySelector('.popup__photos').appendChild(renderPhotos(item.offer.photos));
