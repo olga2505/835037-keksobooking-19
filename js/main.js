@@ -19,7 +19,7 @@ var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditio
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 var map = document.querySelector('.map');
 
-var allFieldsForm = document.querySelectorAll('fieldset');
+var allFieldsetsForm = document.querySelectorAll('fieldset');
 var mapFiltrSelect = document.querySelectorAll('.map__filters select');
 var pinMain = document.querySelector('.map__pin--main');
 var address = document.querySelector('#address');
@@ -203,8 +203,8 @@ var offers = createAdvertisements(NUMBER_OF_ADS); // массив
 
 // renderAd(offers[0]);
 
-var getAddresAndblockingForm = function () {
-  allFieldsForm.forEach(function (item) {
+var setAddressAndBlockingForm = function () {
+  allFieldsetsForm.forEach(function (item) {
     item.setAttribute('disabled', 'true');
   });
   mapFiltrSelect.forEach(function (item) {
@@ -216,7 +216,7 @@ var getAddresAndblockingForm = function () {
 var unlockPage = function (evt) {
   if (evt.button === 0) {
     map.classList.remove('map--faded');
-    allFieldsForm.forEach(function (item) {
+    allFieldsetsForm.forEach(function (item) {
       item.removeAttribute('disabled');
     });
     mapFiltrSelect.forEach(function (item) {
@@ -224,12 +224,12 @@ var unlockPage = function (evt) {
     });
     adForm.classList.remove('ad-form--disabled');
     address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
-    pinMain.removeEventListener('click', unlockPage);
+    pinMain.removeEventListener('mousedown', unlockPage);
     renderPins(offers);
   }
 };
 
-pinMain.addEventListener('click', unlockPage);
+pinMain.addEventListener('mousedown', unlockPage);
 
 var housingTypeMinPriceMap = {
   'bungalo': 0,
@@ -267,5 +267,5 @@ var validateRoomsGuests = function () { // количество комнат и 
   }
 };
 
-getAddresAndblockingForm();
+setAddressAndBlockingForm();
 validateRoomsGuests();
