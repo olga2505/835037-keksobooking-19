@@ -1,5 +1,6 @@
 'use strict';
 
+var ENTER_KEY = 'Enter';
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
 var MAP_PIN_CIRCLE = 65;
@@ -213,8 +214,8 @@ var setAddressAndBlockingForm = function () {
   address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_CIRCLE / 2);
 };
 
-var unlockPage = function (evt) {
-  if (evt.button === 0) {
+var onPinMainmousedown = function (evt) {
+  if (evt.button === 0 || evt.key === ENTER_KEY) {
     map.classList.remove('map--faded');
     allFieldsetsForm.forEach(function (item) {
       item.removeAttribute('disabled');
@@ -224,12 +225,14 @@ var unlockPage = function (evt) {
     });
     adForm.classList.remove('ad-form--disabled');
     address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
-    pinMain.removeEventListener('mousedown', unlockPage);
+    pinMain.removeEventListener('mousedown', onPinMainmousedown);
     renderPins(offers);
   }
 };
 
-pinMain.addEventListener('mousedown', unlockPage);
+pinMain.addEventListener('mousedown', onPinMainmousedown);
+pinMain.addEventListener('keydown', onPinMainmousedown);
+
 
 var housingTypeMinPriceMap = {
   'bungalo': 0,
@@ -266,6 +269,14 @@ var validateRoomsGuests = function () { // количество комнат и 
     roomNumber.setCustomValidity('');
   }
 };
+
+roomNumber.addEventListener('change', function () {
+  validateRoomsGuests();
+});
+
+capacity.addEventListener('change', function () {
+  validateRoomsGuests();
+});
 
 setAddressAndBlockingForm();
 validateRoomsGuests();
