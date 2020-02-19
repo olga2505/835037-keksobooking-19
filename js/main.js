@@ -214,8 +214,8 @@ var setAddressAndBlockingForm = function () {
   address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_CIRCLE / 2);
 };
 
-var onPinMainmousedown = function (evt) {
-  if (evt.button === 0 || evt.key === ENTER_KEY) {
+var onPinMainMousedown = function (evt) {
+  if (evt.button === 0) {
     map.classList.remove('map--faded');
     allFieldsetsForm.forEach(function (item) {
       item.removeAttribute('disabled');
@@ -225,13 +225,29 @@ var onPinMainmousedown = function (evt) {
     });
     adForm.classList.remove('ad-form--disabled');
     address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
-    pinMain.removeEventListener('mousedown', onPinMainmousedown);
+    pinMain.removeEventListener('mousedown', onPinMainMousedown);
     renderPins(offers);
   }
 };
 
-pinMain.addEventListener('mousedown', onPinMainmousedown);
-pinMain.addEventListener('keydown', onPinMainmousedown);
+var onPinMainKeydown = function (evt) {
+  if (evt.key === ENTER_KEY) {
+    map.classList.remove('map--faded');
+    allFieldsetsForm.forEach(function (item) {
+      item.removeAttribute('disabled');
+    });
+    mapFiltrSelect.forEach(function (item) {
+      item.removeAttribute('disabled');
+    });
+    adForm.classList.remove('ad-form--disabled');
+    address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
+    pinMain.removeEventListener('mousedown', onPinMainMousedown);
+    renderPins(offers);
+  }
+};
+
+pinMain.addEventListener('mousedown', onPinMainMousedown);
+pinMain.addEventListener('keydown', onPinMainKeydown);
 
 
 var housingTypeMinPriceMap = {
