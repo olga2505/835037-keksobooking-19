@@ -21,7 +21,7 @@ var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.g
 var map = document.querySelector('.map');
 
 var allFieldsetsForm = document.querySelectorAll('fieldset');
-var mapFiltrSelect = document.querySelectorAll('.map__filters select');
+var mapFilterSelect = document.querySelectorAll('.map__filters select');
 var pinMain = document.querySelector('.map__pin--main');
 var address = document.querySelector('#address');
 var adForm = document.querySelector('.ad-form');
@@ -208,41 +208,36 @@ var setAddressAndBlockingForm = function () {
   allFieldsetsForm.forEach(function (item) {
     item.setAttribute('disabled', 'true');
   });
-  mapFiltrSelect.forEach(function (item) {
+  mapFilterSelect.forEach(function (item) {
     item.setAttribute('disabled', 'true');
   });
   address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_CIRCLE / 2);
 };
 
+var getAddresAndblockingForm = function () { // функция разблокировки и запись адреса
+  map.classList.remove('map--faded');
+  allFieldsetsForm.forEach(function (item) {
+    item.removeAttribute('disabled');
+  });
+  mapFilterSelect.forEach(function (item) {
+    item.removeAttribute('disabled');
+  });
+  adForm.classList.remove('ad-form--disabled');
+  address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
+  renderPins(offers);
+};
+
 var onPinMainMousedown = function (evt) {
   if (evt.button === 0) {
-    map.classList.remove('map--faded');
-    allFieldsetsForm.forEach(function (item) {
-      item.removeAttribute('disabled');
-    });
-    mapFiltrSelect.forEach(function (item) {
-      item.removeAttribute('disabled');
-    });
-    adForm.classList.remove('ad-form--disabled');
-    address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
+    getAddresAndblockingForm();
     pinMain.removeEventListener('mousedown', onPinMainMousedown);
-    renderPins(offers);
   }
 };
 
 var onPinMainKeydown = function (evt) {
   if (evt.key === ENTER_KEY) {
-    map.classList.remove('map--faded');
-    allFieldsetsForm.forEach(function (item) {
-      item.removeAttribute('disabled');
-    });
-    mapFiltrSelect.forEach(function (item) {
-      item.removeAttribute('disabled');
-    });
-    adForm.classList.remove('ad-form--disabled');
-    address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
-    pinMain.removeEventListener('mousedown', onPinMainMousedown);
-    renderPins(offers);
+    getAddresAndblockingForm();
+    pinMain.removeEventListener('keydown', onPinMainKeydown);
   }
 };
 
