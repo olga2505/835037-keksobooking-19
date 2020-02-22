@@ -237,7 +237,7 @@ var onPinMainMousedown = function (evt) {
 
 var onPinMainKeydown = function (evt) {
   if (evt.key === ENTER_KEY) {
-    getAddresAndUnlockForm();
+    getAddressAndUnlockForm();
   }
 };
 
