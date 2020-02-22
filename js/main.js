@@ -214,7 +214,7 @@ var setAddressAndBlockingForm = function () {
   address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_CIRCLE / 2);
 };
 
-var getAddresAndUnlockForm = function () { // функция разблокировки и запись адреса
+var getAddressAndUnlockForm = function () { // функция разблокировки и запись адреса
   map.classList.remove('map--faded');
   allFieldsetsForm.forEach(function (item) {
     item.removeAttribute('disabled');
@@ -231,7 +231,7 @@ var getAddresAndUnlockForm = function () { // функция разблокир�
 
 var onPinMainMousedown = function (evt) {
   if (evt.button === 0) {
-    getAddresAndUnlockForm();
+    getAddressAndUnlockForm();
   }
 };
 
