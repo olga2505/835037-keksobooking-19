@@ -214,7 +214,7 @@ var setAddressAndBlockingForm = function () {
   address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_CIRCLE / 2);
 };
 
-var getAddresAndblockingForm = function () { // функция разблокировки и запись адреса
+var getAddresAndUnlockForm = function () { // функция разблокировки и запись адреса
   map.classList.remove('map--faded');
   allFieldsetsForm.forEach(function (item) {
     item.removeAttribute('disabled');
@@ -225,19 +225,19 @@ var getAddresAndblockingForm = function () { // функция разблоки�
   adForm.classList.remove('ad-form--disabled');
   address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
   renderPins(offers);
+  pinMain.removeEventListener('mousedown', onPinMainMousedown);
+  pinMain.removeEventListener('keydown', onPinMainKeydown);
 };
 
 var onPinMainMousedown = function (evt) {
   if (evt.button === 0) {
-    getAddresAndblockingForm();
-    pinMain.removeEventListener('mousedown', onPinMainMousedown);
+    getAddresAndUnlockForm();
   }
 };
 
 var onPinMainKeydown = function (evt) {
   if (evt.key === ENTER_KEY) {
-    getAddresAndblockingForm();
-    pinMain.removeEventListener('keydown', onPinMainKeydown);
+    getAddresAndUnlockForm();
   }
 };
 
