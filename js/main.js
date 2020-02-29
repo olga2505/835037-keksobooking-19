@@ -95,18 +95,17 @@ var renderPin = function (pin) {
     renderAd(pin);
     var popupClose = document.querySelector('.popup__close');
     var mapCard = document.querySelector('.map__card');
-    var onClickClosed = function () {
+    var onButtonClosedClick = function () {
       mapCard.parentNode.removeChild(mapCard);
-      document.removeEventListener('keydown', onEscapeDown);
+      document.removeEventListener('keydown', onBattonEscapeDown);
     };
-    var onEscapeDown = function (evt) {
+    var onBattonEscapeDown = function (evt) {
       if (evt.key === 'Escape') {
-        mapCard.parentNode.removeChild(mapCard);
-        document.removeEventListener('keydown', onEscapeDown);
+        onButtonClosedClick();
       }
     };
-    popupClose.addEventListener('click', onClickClosed);
-    document.addEventListener('keydown', onEscapeDown);
+    popupClose.addEventListener('click', onButtonClosedClick);
+    document.addEventListener('keydown', onBattonEscapeDown);
   };
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var pinElement = pinTemplate.cloneNode(true);
@@ -295,6 +294,8 @@ var validateRoomsGuests = function () { // количество комнат и 
     roomNumber.setCustomValidity('Нужно большее количество комнат');
   } else if (guests === 0 && rooms < 100) {
     roomNumber.setCustomValidity('Нужно большее количество комнат');
+  } else if (rooms === 100 && guests > 0) {
+    roomNumber.setCustomValidity('Не для гостей');
   } else {
     roomNumber.setCustomValidity('');
   }
