@@ -99,12 +99,17 @@ var renderPin = function (pin) {
       mapCard.parentNode.removeChild(mapCard);
       document.removeEventListener('keydown', onButtonEscapeDown);
     };
+
+    var onPopupCloseClick = function () {
+      closeCard();
+    };
+
     var onButtonEscapeDown = function (evt) {
       if (evt.key === 'Escape') {
         closeCard();
       }
     };
-    popupClose.addEventListener('click', closeCard);
+    popupClose.addEventListener('click', onPopupCloseClick);
     document.addEventListener('keydown', onButtonEscapeDown);
   };
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
