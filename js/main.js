@@ -95,17 +95,17 @@ var renderPin = function (pin) {
     renderAd(pin);
     var popupClose = document.querySelector('.popup__close');
     var mapCard = document.querySelector('.map__card');
-    var onButtonClosedClick = function () {
+    var closeCard = function () {
       mapCard.parentNode.removeChild(mapCard);
-      document.removeEventListener('keydown', onBattonEscapeDown);
+      document.removeEventListener('keydown', onButtonEscapeDown);
     };
-    var onBattonEscapeDown = function (evt) {
+    var onButtonEscapeDown = function (evt) {
       if (evt.key === 'Escape') {
-        onButtonClosedClick();
+        closeCard();
       }
     };
-    popupClose.addEventListener('click', onButtonClosedClick);
-    document.addEventListener('keydown', onBattonEscapeDown);
+    popupClose.addEventListener('click', closeCard);
+    document.addEventListener('keydown', onButtonEscapeDown);
   };
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var pinElement = pinTemplate.cloneNode(true);
