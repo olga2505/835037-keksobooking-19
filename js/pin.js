@@ -49,7 +49,7 @@
   };
 
   window.pin = {
-    renderPins: renderPins,
+    render: renderPins,
   };
 })();
 

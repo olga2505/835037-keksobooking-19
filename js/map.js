@@ -37,7 +37,7 @@
     });
     adForm.classList.remove('ad-form--disabled');
     address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
-    window.pin.renderPins(offers);
+    window.pin.render(offers);
     pinMain.removeEventListener('mousedown', onPinMainMousedown);
     pinMain.removeEventListener('keydown', onPinMainKeydown);
   };
