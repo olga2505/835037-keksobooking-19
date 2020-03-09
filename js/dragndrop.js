@@ -10,6 +10,8 @@
 
   var onPinMainMousedown = function (evt) {
     evt.preventDefault();
+    window.removeEventListener('mouseup', onMouseUp);
+
     if (evt.button === 0) {
       window.map.getAddressAndUnlockForm();
     }
@@ -20,22 +22,25 @@
 
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
+      var coordinateAddressX = Math.ceil(startCoords.x + MAP_PIN_CIRCLE / 2);
+      var coordinateAddressY = Math.ceil(startCoords.y + MAP_PIN_HEIGHT);
 
-      if (startCoords.x > 0 && startCoords.x <= 1200 && startCoords.y >= 130 && startCoords.y <= 630) {
-        var shift = {
-          x: startCoords.x - moveEvt.clientX,
-          y: startCoords.y - moveEvt.clientY
-        };
+      var shift = {
+        x: startCoords.x - moveEvt.clientX,
+        y: startCoords.y - moveEvt.clientY
+      };
 
-        startCoords = {
-          x: moveEvt.clientX,
-          y: moveEvt.clientY
-        };
+      startCoords = {
+        x: moveEvt.clientX,
+        y: moveEvt.clientY
+      };
+
+      if (coordinateAddressX > 0 && coordinateAddressX <= 1200 && coordinateAddressY >= 130 && coordinateAddressY <= 630) {
 
         pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
         pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
 
-        address.value = Math.ceil(startCoords.x + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(startCoords.y + MAP_PIN_HEIGHT);
+        address.value = coordinateAddressX + ', ' + coordinateAddressY;
       }
     };
 
