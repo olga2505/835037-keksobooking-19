@@ -2,29 +2,35 @@
 // перетаскивание метки
 (function () {
   var MAP_PIN_CIRCLE = 65;
-  var MAP_PIN_HEIGHT = 84;
-  var pinMain = document.querySelector('.map__pin--main');
+  var MAP_PIN_HEIGHT = 75;
   var ENTER_KEY = 'Enter';
+  var PIN_COORDS = {
+    xCord: {
+      min: 0,
+      max: 1200
+    },
+    yCord: {
+      min: 130,
+      max: 630
+    }
+  };
+  var pinMain = document.querySelector('.map__pin--main');
   var address = document.querySelector('#address');
-
+  var map = document.querySelector('.map');
 
   var onPinMainMousedown = function (evt) {
-    evt.preventDefault();
-    window.removeEventListener('mouseup', onMouseUp);
-
-    if (evt.button === 0) {
-      window.map.getAddressAndUnlockForm();
+    if (map.classList.contains('map--faded')) {
+      if (evt.button === 0) {
+        window.map.getAddressAndUnlockForm();
+      }
     }
+
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
     };
 
     var onMouseMove = function (moveEvt) {
-      moveEvt.preventDefault();
-      var coordinateAddressX = Math.ceil(startCoords.x + MAP_PIN_CIRCLE / 2);
-      var coordinateAddressY = Math.ceil(startCoords.y + MAP_PIN_HEIGHT);
-
       var shift = {
         x: startCoords.x - moveEvt.clientX,
         y: startCoords.y - moveEvt.clientY
@@ -35,29 +41,35 @@
         y: moveEvt.clientY
       };
 
-      if (coordinateAddressX > 0 && coordinateAddressX <= 1200 && coordinateAddressY >= 130 && coordinateAddressY <= 630) {
+      var coordinateAddressX = parseInt(pinMain.style.left, 10) + Math.round(MAP_PIN_CIRCLE / 2) - shift.x;
+      var coordinateAddressY = parseInt(pinMain.style.top, 10) + MAP_PIN_HEIGHT - shift.y;
 
-        pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
-        pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
+      if (coordinateAddressX >= PIN_COORDS.xCord.min && coordinateAddressX <= PIN_COORDS.xCord.max) {
 
-        address.value = coordinateAddressX + ', ' + coordinateAddressY;
+        pinMain.style.left = (coordinateAddressX - MAP_PIN_CIRCLE / 2) + 'px';
+      } else {
+        coordinateAddressX += shift.x;
       }
+
+      if (coordinateAddressY >= PIN_COORDS.yCord.min && coordinateAddressY <= PIN_COORDS.yCord.max) {
+        pinMain.style.top = (coordinateAddressY - MAP_PIN_HEIGHT) + 'px';
+      }
+
+      address.value = coordinateAddressX + ', ' + coordinateAddressY;
     };
 
-    var onMouseUp = function (upEvt) {
-      upEvt.preventDefault();
-
+    var onMouseUp = function () {
       document.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mouseup', onMouseUp);
     };
 
     document.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mouseup', onMouseUp);
   };
 
   var onPinMainKeydown = function (evt) {
     if (evt.key === ENTER_KEY) {
-      window.map.getAddressAndUnlockForm();
+      document.map.getAddressAndUnlockForm();
     }
   };
 
