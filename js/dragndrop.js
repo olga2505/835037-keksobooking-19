@@ -53,6 +53,8 @@
 
       if (coordinateAddressY >= PIN_COORDS.yCord.min && coordinateAddressY <= PIN_COORDS.yCord.max) {
         pinMain.style.top = (coordinateAddressY - MAP_PIN_HEIGHT) + 'px';
+      } else {
+        coordinateAddressY += shift.y;
       }
 
       address.value = coordinateAddressX + ', ' + coordinateAddressY;
