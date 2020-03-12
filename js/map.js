@@ -5,7 +5,7 @@
   var MAP_PIN_HEIGHT = 84;
   var MAP_PIN_X = 570;
   var MAP_PIN_Y = 375;
-  var NUMBER_OF_ADS = 8;
+  // var NUMBER_OF_ADS = 8;
   var map = document.querySelector('.map');
   var adForm = document.querySelector('.ad-form');
 
@@ -13,7 +13,7 @@
   var mapFilterSelect = document.querySelectorAll('.map__filters select');
   var address = document.querySelector('#address');
 
-  var offers = window.data.createAdvertisements(NUMBER_OF_ADS); // массив
+  // var offers = window.data.createAdvertisements(NUMBER_OF_ADS); // массив
 
   var setAddressAndBlockingForm = function () {
     allFieldsetsForm.forEach(function (item) {
@@ -35,7 +35,7 @@
     });
     adForm.classList.remove('ad-form--disabled');
     address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
-    window.pin.render(offers);
+    // window.pin.render(offers);
   };
 
   setAddressAndBlockingForm();

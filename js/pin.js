@@ -3,6 +3,8 @@
 (function () {
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
+  var NUMBER_OF_ADS = 8;
+
   var mapPins = document.querySelector('.map__pins');
 
   var renderPin = function (pin) {
@@ -40,16 +42,25 @@
     return pinElement;
   };
 
-  var renderPins = function (pins) {
+  window.load(function (pin) {
     var fragment = document.createDocumentFragment();
-    pins.forEach(function (pin) {
-      fragment.appendChild(renderPin(pin));
-    });
-    mapPins.appendChild(fragment);
-  };
 
-  window.pin = {
-    render: renderPins,
-  };
+    for (var i = 0; i < NUMBER_OF_ADS; i++) {
+      fragment.appendChild(renderPin(pin[i]));
+    }
+    mapPins.appendChild(fragment);
+
+  });
+  // var renderPins = function (pins) {
+  //   var fragment = document.createDocumentFragment();
+  //   pins.forEach(function (pin) {
+  //     fragment.appendChild(renderPin(pin));
+  //   });
+  //   mapPins.appendChild(fragment);
+  // };
+
+  // window.pin = {
+  //   render: renderPins,
+  // };
 })();
 
