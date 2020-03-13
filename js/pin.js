@@ -55,7 +55,7 @@
 
   var onError = function () {
     var main = document.querySelector('main');
-    var errorMessageTemplate = document.querySelector('#error').textContent.querySelector('.error');
+    var errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
     var errorMessageElement = errorMessageTemplate.cloneNode(true);
     main.appendChild(errorMessageElement);
   };
