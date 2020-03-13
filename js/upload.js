@@ -20,10 +20,10 @@
     });
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
-      var main = document.querySelector('main');
-      var errorMessageTemplate = document.querySelector('#error').textContent.querySelector('.error');
-      var errorMessageElement = errorMessageTemplate.cloneNode(true);
-      main.appendChild(errorMessageElement);
+      // var main = document.querySelector('main');
+      // var errorMessageTemplate = document.querySelector('#error').textContent.querySelector('.error');
+      // var errorMessageElement = errorMessageTemplate.cloneNode(true);
+      // main.appendChild(errorMessageElement);
     });
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');

@@ -12,8 +12,6 @@
   var mapFilterSelect = document.querySelectorAll('.map__filters select');
   var address = document.querySelector('#address');
 
-  // var offers = window.data.createAdvertisements(NUMBER_OF_ADS); // массив
-
   var setAddressAndBlockingForm = function () {
     allFieldsetsForm.forEach(function (item) {
       item.setAttribute('disabled', 'true');
@@ -34,6 +32,7 @@
     });
     adForm.classList.remove('ad-form--disabled');
     address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
+    window.load(window.pin.onSuccess, window.pin.onError);
   };
 
   setAddressAndBlockingForm();

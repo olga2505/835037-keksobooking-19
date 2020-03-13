@@ -49,7 +49,19 @@
     mapPins.appendChild(fragment);
   };
 
-  window.load(function (pins) {
+  var onSuccess = function (pins) {
     renderPins(pins);
-  });
+  };
+
+  var onError = function () {
+    var main = document.querySelector('main');
+    var errorMessageTemplate = document.querySelector('#error').textContent.querySelector('.error');
+    var errorMessageElement = errorMessageTemplate.cloneNode(true);
+    main.appendChild(errorMessageElement);
+  };
+
+  window.pin = {
+    onSuccess: onSuccess,
+    onError: onError
+  };
 })();

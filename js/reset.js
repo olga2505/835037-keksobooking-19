@@ -37,9 +37,17 @@
     if (mapCard) {
       mapCard.parentNode.removeChild(mapCard);
     }
+
     var mapPin = document.querySelector('.map__pin');
     mapPin.style.left = window.map.MAP_PIN_X + 'px';
     mapPin.style.top = window.map.MAP_PIN_Y + 'px';
+
+    var mapPinAll = document.querySelectorAll('.map__pin');
+    mapPinAll.forEach(function (item) {
+      if (!item.classList.contains('map__pin--main')) {
+        item.parentNode.removeChild(item);
+      }
+    });
   };
 
   form.addEventListener('submit', function (evt) {
