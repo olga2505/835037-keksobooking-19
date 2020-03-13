@@ -3,6 +3,7 @@
 (function () {
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
+
   var mapPins = document.querySelector('.map__pins');
 
   var renderPin = function (pin) {
@@ -48,8 +49,39 @@
     mapPins.appendChild(fragment);
   };
 
+  var onSuccess = function (pins) {
+    renderPins(pins);
+  };
+
+  var closeMessage = function () {
+    var error = document.querySelector('.error');
+    if (error) {
+      error.parentNode.removeChild(error);
+    }
+  };
+
+  var onMessageCloseClick = function () {
+    closeMessage();
+  };
+
+  var onBattonEscMessage = function (evt) {
+    if (evt.key === 'Escape') {
+      closeMessage();
+    }
+  };
+
+  var onError = function () {
+    var main = document.querySelector('main');
+    var errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
+    var errorMessageElement = errorMessageTemplate.cloneNode(true);
+    main.appendChild(errorMessageElement);
+    document.addEventListener('click', onMessageCloseClick);
+    document.addEventListener('keydown', onBattonEscMessage);
+
+  };
+
   window.pin = {
-    render: renderPins,
+    onSuccess: onSuccess,
+    onError: onError
   };
 })();
-
