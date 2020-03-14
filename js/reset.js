@@ -22,11 +22,16 @@
   var map = document.querySelector('.map');
   var main = document.querySelector('main');
   var buttonFormReset = document.querySelector('.ad-form__reset');
+  var adForm = document.querySelector('.ad-form');
+  var mapFilters = document.querySelector('.map__filters');
 
   var resetForm = function () {
     form.reset();
+    mapFilters.reset();
     window.map.setAddressAndBlockingForm();
     map.classList.add('map--faded');
+    adForm.classList.add('ad-form--disabled');
+
     var successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
     var successMessageElement = successMessageTemplate.cloneNode(true);
     main.appendChild(successMessageElement);
@@ -48,6 +53,8 @@
         item.parentNode.removeChild(item);
       }
     });
+
+
   };
 
   form.addEventListener('submit', function (evt) {
