@@ -25,7 +25,8 @@
   var adForm = document.querySelector('.ad-form');
   var mapFilters = document.querySelector('.map__filters');
 
-  var resetForm = function () {
+  var resetForm = function (evt) {
+    evt.preventDefault();
     form.reset();
     mapFilters.reset();
     window.map.setAddressAndBlockingForm();
@@ -53,19 +54,13 @@
         item.parentNode.removeChild(item);
       }
     });
-
-
   };
 
   form.addEventListener('submit', function (evt) {
-    window.upload(new FormData(form), function () {
-      resetForm();
-    });
-    evt.preventDefault();
+    window.data.upload(new FormData(form), resetForm(evt), window.pin.onError);
   });
 
   buttonFormReset.addEventListener('click', function (evt) {
-    resetForm();
-    evt.preventDefault();
+    resetForm(evt);
   });
 })();
