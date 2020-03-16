@@ -12,7 +12,7 @@
     closeMessage();
   };
 
-  var onBattonEscMessage = function (evt) {
+  var onButtonEscMessage = function (evt) {
     if (evt.key === 'Escape') {
       closeMessage();
     }
@@ -37,7 +37,7 @@
     var successMessageElement = successMessageTemplate.cloneNode(true);
     main.appendChild(successMessageElement);
     document.addEventListener('click', onMessageCloseClick);
-    document.addEventListener('keydown', onBattonEscMessage);
+    document.addEventListener('keydown', onButtonEscMessage);
 
     var mapCard = document.querySelector('.map__card');
     if (mapCard) {
@@ -60,7 +60,5 @@
     window.data.upload(new FormData(form), resetForm(evt), window.pin.onError);
   });
 
-  buttonFormReset.addEventListener('click', function (evt) {
-    resetForm(evt);
-  });
+  buttonFormReset.addEventListener('click', resetForm);
 })();

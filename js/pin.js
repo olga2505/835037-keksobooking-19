@@ -64,7 +64,7 @@
     closeMessage();
   };
 
-  var onBattonEscMessage = function (evt) {
+  var onButtonEscMessage = function (evt) {
     if (evt.key === 'Escape') {
       closeMessage();
     }
@@ -76,7 +76,7 @@
     var errorMessageElement = errorMessageTemplate.cloneNode(true);
     main.appendChild(errorMessageElement);
     document.addEventListener('click', onMessageCloseClick);
-    document.addEventListener('keydown', onBattonEscMessage);
+    document.addEventListener('keydown', onButtonEscMessage);
 
   };
 

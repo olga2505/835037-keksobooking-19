@@ -1,15 +1,15 @@
 'use strict';
 // загрузка похожих объявлений с сервера
 (function () {
-  var URL__LOAD = 'https://js.dump.academy/keksobooking/data';
-  var URL__UPLOAD = 'https://js.dump.academy/keksobooking';
+  var URL_LOAD = 'https://js.dump.academy/keksobooking/data';
+  var URL_UPLOAD = 'https://js.dump.academy/keksobooking';
 
   var TIMEOUT_IN_MS = 10000;
   var StatusCode = {
     OK: 200
   };
 
-  var setuoXMLHttpRequest = function (onSuccess, onError) {
+  var setupXMLHttpRequest = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -34,16 +34,16 @@
 
   window.data = {
     download: function (onSuccess, onError) {
-      var xhr = setuoXMLHttpRequest(onSuccess, onError);
+      var xhr = setupXMLHttpRequest(onSuccess, onError);
       xhr.timeout = TIMEOUT_IN_MS;
-      xhr.open('GET', URL__LOAD);
+      xhr.open('GET', URL_LOAD);
       xhr.send();
     },
 
     upload: function (data, onSuccess, onError) {
-      var xhr = setuoXMLHttpRequest(onSuccess, onError);
+      var xhr = setupXMLHttpRequest(onSuccess, onError);
       xhr.timeout = TIMEOUT_IN_MS;
-      xhr.open('POST', URL__UPLOAD);
+      xhr.open('POST', URL_UPLOAD);
       xhr.send(data);
     }
   };
