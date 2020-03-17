@@ -56,8 +56,8 @@
     });
   };
 
-  form.addEventListener('submit', function (evt) {
-    window.data.upload(new FormData(form), resetForm(evt), window.pin.onError);
+  form.addEventListener('submit', function () {
+    window.data.upload(new FormData(form), resetForm, window.pin.onError);
   });
 
   buttonFormReset.addEventListener('click', resetForm);
