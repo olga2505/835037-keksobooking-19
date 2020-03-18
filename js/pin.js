@@ -50,6 +50,7 @@
   };
 
   var onSuccess = function (pins) {
+    window.data = pins;
     renderPins(pins);
   };
 
@@ -77,7 +78,6 @@
     main.appendChild(errorMessageElement);
     document.addEventListener('click', onMessageCloseClick);
     document.addEventListener('keydown', onButtonEscMessage);
-
   };
 
   window.pin = {
