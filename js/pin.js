@@ -57,6 +57,8 @@
     var error = document.querySelector('.error');
     if (error) {
       error.parentNode.removeChild(error);
+      document.addEventListener('click', onMessageCloseClick);
+      document.addEventListener('keydown', onButtonEscMessage);
     }
   };
 
@@ -75,8 +77,6 @@
     var errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
     var errorMessageElement = errorMessageTemplate.cloneNode(true);
     main.appendChild(errorMessageElement);
-    document.addEventListener('click', onMessageCloseClick);
-    document.addEventListener('keydown', onButtonEscMessage);
   };
 
   window.pin = {

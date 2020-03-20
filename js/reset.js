@@ -79,7 +79,7 @@
   var onSuccess = function () {
     deactivatePage();
     showSuccessMessage();
-
+    resetForm();
   };
 
   buttonFormReset.addEventListener('click', onFormReset);
@@ -92,6 +92,5 @@
     window.data.upload(new FormData(form), onSuccess, window.pin.onError);
     document.removeEventListener('click', onMessageCloseClick);
     document.removeEventListener('keydown', onButtonEscMessage);
-    resetForm();
   });
 })();
