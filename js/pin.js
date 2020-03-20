@@ -50,7 +50,6 @@
   };
 
   var onSuccess = function (pins) {
-    window.data = pins;
     renderPins(pins);
   };
 
