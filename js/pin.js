@@ -6,25 +6,6 @@
 
   var mapPins = document.querySelector('.map__pins');
 
-  // var popupClose = document.querySelector('.popup__close');
-  // var mapCard = document.querySelector('.map__card');
-
-  // var closeCard = function () {
-  //   mapCard.parentNode.removeChild(mapCard);
-  //   document.removeEventListener('keydown', onButtonEscapeDown);
-  // };
-
-  // var onPopupCloseClick = function () {
-  //   closeCard();
-  // };
-
-  // var onButtonEscapeDown = function (evt) {
-  //   if (evt.key === 'Escape') {
-  //     closeCard();
-  //   }
-  // };
-
-
   var renderPin = function (pin) {
 
     var onPinElementClick = function () {
