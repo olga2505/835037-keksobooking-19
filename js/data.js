@@ -1,17 +1,17 @@
 'use strict';
 // загрузка похожих объявлений с сервера
 (function () {
-  var URL = 'https://js.dump.academy/keksobooking/data';
+  var URL_LOAD = 'https://js.dump.academy/keksobooking/data';
+  var URL_UPLOAD = 'https://js.dump.academy/keksobooking';
+
   var TIMEOUT_IN_MS = 10000;
   var StatusCode = {
     OK: 200
   };
 
-  window.load = function (onSuccess, onError) {
+  var setupXMLHttpRequest = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-
-    xhr.open('GET', URL);
 
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
@@ -24,13 +24,27 @@
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
     });
+
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = TIMEOUT_IN_MS;
+    return xhr;
+  };
 
-    xhr.open('GET', URL);
-    xhr.send();
+  window.data = {
+    download: function (onSuccess, onError) {
+      var xhr = setupXMLHttpRequest(onSuccess, onError);
+      xhr.timeout = TIMEOUT_IN_MS;
+      xhr.open('GET', URL_LOAD);
+      xhr.send();
+    },
+
+    upload: function (data, onSuccess, onError) {
+      var xhr = setupXMLHttpRequest(onSuccess, onError);
+      xhr.timeout = TIMEOUT_IN_MS;
+      xhr.open('POST', URL_UPLOAD);
+      xhr.send(data);
+    }
   };
 })();

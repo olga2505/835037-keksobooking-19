@@ -32,7 +32,7 @@
     });
     adForm.classList.remove('ad-form--disabled');
     address.value = Math.ceil(MAP_PIN_X + MAP_PIN_CIRCLE / 2) + ', ' + Math.ceil(MAP_PIN_Y + MAP_PIN_HEIGHT);
-    window.load(window.pin.onSuccess, window.pin.onError);
+    window.data.download(window.pin.onSuccess, window.pin.onError);
   };
 
   setAddressAndBlockingForm();
