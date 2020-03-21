@@ -5,6 +5,8 @@
     var success = document.querySelector('.success');
     if (success) {
       success.parentNode.removeChild(success);
+      document.removeEventListener('click', onMessageCloseClick);
+      document.removeEventListener('keydown', onButtonEscMessage);
     }
   };
 
@@ -30,32 +32,26 @@
     mapFilters.reset();
   };
 
-  var deactivatePage = function () {
-    window.map.setAddressAndBlockingForm();
-    map.classList.add('map--faded');
-    adForm.classList.add('ad-form--disabled');
-
-    // var successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
-    // var successMessageElement = successMessageTemplate.cloneNode(true);
-    // main.appendChild(successMessageElement);
-    // document.addEventListener('click', onMessageCloseClick);
-    // document.addEventListener('keydown', onButtonEscMessage);
-
-    // var mapCard = document.querySelector('.map__card');
-    // if (mapCard) {
-    //   mapCard.parentNode.removeChild(mapCard);
-    // }
-
-    var mapPin = document.querySelector('.map__pin');
-    mapPin.style.left = window.map.MAP_PIN_X + 'px';
-    mapPin.style.top = window.map.MAP_PIN_Y + 'px';
-
+  var deletePins = function () {
     var mapPinAll = document.querySelectorAll('.map__pin');
     mapPinAll.forEach(function (item) {
       if (!item.classList.contains('map__pin--main')) {
         item.parentNode.removeChild(item);
       }
     });
+  };
+
+  var deactivatePage = function () {
+    window.map.setAddressAndBlockingForm();
+    map.classList.add('map--faded');
+    adForm.classList.add('ad-form--disabled');
+
+    var mapPin = document.querySelector('.map__pin');
+    mapPin.style.left = window.map.MAP_PIN_X + 'px';
+    mapPin.style.top = window.map.MAP_PIN_Y + 'px';
+
+    deletePins();
+    window.filter.unSetFiltration();
   };
 
   var showSuccessMessage = function () {
@@ -90,7 +86,11 @@
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
     window.data.upload(new FormData(form), onSuccess, window.pin.onError);
-    document.removeEventListener('click', onMessageCloseClick);
-    document.removeEventListener('keydown', onButtonEscMessage);
+    // document.removeEventListener('click', onMessageCloseClick);
+    // document.removeEventListener('keydown', onButtonEscMessage);
   });
+
+  window.reset = {
+    deletePins: deletePins
+  };
 })();
