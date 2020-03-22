@@ -82,7 +82,6 @@
   };
 
   window.pin = {
-    // closeCard: closeCard,
     renderPins: renderPins,
     onSuccess: onSuccess,
     onError: onError

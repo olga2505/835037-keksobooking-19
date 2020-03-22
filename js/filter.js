@@ -6,10 +6,7 @@
   var housingPrice = document.querySelector('#housing-price');
   var housingRooms = document.querySelector('#housing-rooms');
   var housingGuests = document.querySelector('#housing-guests');
-  var housingFeatures = Array.from(document.querySelectorAll('.map__checkbox:checked'));
-  var selectedFeatures = housingFeatures.map(function (checkbox) {
-    return checkbox.value;
-  });
+
 
   var setFiltration = function (pins) {
 
@@ -19,6 +16,10 @@
       var housingPriceValue = housingPrice.value;
       var housingRoomsValue = housingRooms.value;
       var housingGuestsValue = housingGuests.value;
+      var housingFeatures = Array.from(document.querySelectorAll('.map__checkbox:checked'));
+      var selectedFeatures = housingFeatures.map(function (checkbox) {
+        return checkbox.value;
+      });
       var RoomPrice = {
         low: {
           MAX: 10000
@@ -75,14 +76,17 @@
         });
       };
 
-      var filtratedPins = pins.filter(filterByType).filter(filterByPrice)
-      .filter(filterByRooms).filter(filterByGuests).filter(filterByFeatures);
-      window.pin.renderPins(filtratedPins);
+      var filtratedPins = pins.filter(filterByType)
+        .filter(filterByPrice)
+        .filter(filterByRooms)
+        .filter(filterByGuests)
+        .filter(filterByFeatures);
+      var debouncedRenderPins = window.debounce(window.pin.renderPins);
+      debouncedRenderPins(filtratedPins);
 
       if (mapCard) {
         window.pin.closeCard();
       }
-      window.debounce(pins);
     };
 
     window.filter.unSetFiltration = function () {
