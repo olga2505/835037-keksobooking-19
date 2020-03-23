@@ -7,6 +7,7 @@
   var housingRooms = document.querySelector('#housing-rooms');
   var housingGuests = document.querySelector('#housing-guests');
 
+  var debouncedRenderPins = window.debounce(window.pin.renderPins);
 
   var setFiltration = function (pins) {
 
@@ -81,7 +82,7 @@
         .filter(filterByRooms)
         .filter(filterByGuests)
         .filter(filterByFeatures);
-      var debouncedRenderPins = window.debounce(window.pin.renderPins);
+
       debouncedRenderPins(filtratedPins);
 
       if (mapCard) {

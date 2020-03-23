@@ -55,15 +55,6 @@
     window.filter.set(pins);
   };
 
-  var closeMessage = function () {
-    var error = document.querySelector('.error');
-    if (error) {
-      error.parentNode.removeChild(error);
-      document.addEventListener('click', onMessageCloseClick);
-      document.addEventListener('keydown', onButtonEscMessage);
-    }
-  };
-
   var onMessageCloseClick = function () {
     closeMessage();
   };
@@ -74,11 +65,24 @@
     }
   };
 
+  var closeMessage = function () {
+    var error = document.querySelector('.error');
+    if (error) {
+      error.parentNode.removeChild(error);
+      document.removeEventListener('click', onMessageCloseClick);
+      document.removeEventListener('keydown', onButtonEscMessage);
+
+    }
+  };
+
   var onError = function () {
     var main = document.querySelector('main');
     var errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
     var errorMessageElement = errorMessageTemplate.cloneNode(true);
     main.appendChild(errorMessageElement);
+    document.addEventListener('click', onMessageCloseClick);
+    document.addEventListener('keydown', onButtonEscMessage);
+
   };
 
   window.pin = {
