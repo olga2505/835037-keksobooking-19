@@ -51,14 +51,4 @@
 
   fileChooserUser.addEventListener('change', getAvatar);
   fileChooserHousing.addEventListener('change', getPhoto);
-
-  // var onInputPhotoUp = function () {
-  //   fileChooserUser.removeEventListener('change', getAvatar);
-  //   fileChooserHousing.removeEventListener('change', getPhoto);
-  // };
-
-  // window.photo = {
-  //   onInputPhotoUp: onInputPhotoUp
-  // };
-
 })();
