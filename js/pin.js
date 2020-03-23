@@ -6,25 +6,6 @@
 
   var mapPins = document.querySelector('.map__pins');
 
-  // var popupClose = document.querySelector('.popup__close');
-  // var mapCard = document.querySelector('.map__card');
-
-  // var closeCard = function () {
-  //   mapCard.parentNode.removeChild(mapCard);
-  //   document.removeEventListener('keydown', onButtonEscapeDown);
-  // };
-
-  // var onPopupCloseClick = function () {
-  //   closeCard();
-  // };
-
-  // var onButtonEscapeDown = function (evt) {
-  //   if (evt.key === 'Escape') {
-  //     closeCard();
-  //   }
-  // };
-
-
   var renderPin = function (pin) {
 
     var onPinElementClick = function () {
@@ -74,15 +55,6 @@
     window.filter.set(pins);
   };
 
-  var closeMessage = function () {
-    var error = document.querySelector('.error');
-    if (error) {
-      error.parentNode.removeChild(error);
-      document.addEventListener('click', onMessageCloseClick);
-      document.addEventListener('keydown', onButtonEscMessage);
-    }
-  };
-
   var onMessageCloseClick = function () {
     closeMessage();
   };
@@ -93,15 +65,27 @@
     }
   };
 
+  var closeMessage = function () {
+    var error = document.querySelector('.error');
+    if (error) {
+      error.parentNode.removeChild(error);
+      document.removeEventListener('click', onMessageCloseClick);
+      document.removeEventListener('keydown', onButtonEscMessage);
+
+    }
+  };
+
   var onError = function () {
     var main = document.querySelector('main');
     var errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
     var errorMessageElement = errorMessageTemplate.cloneNode(true);
     main.appendChild(errorMessageElement);
+    document.addEventListener('click', onMessageCloseClick);
+    document.addEventListener('keydown', onButtonEscMessage);
+
   };
 
   window.pin = {
-    // closeCard: closeCard,
     renderPins: renderPins,
     onSuccess: onSuccess,
     onError: onError

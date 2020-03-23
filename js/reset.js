@@ -26,10 +26,12 @@
   var buttonFormReset = document.querySelector('.ad-form__reset');
   var adForm = document.querySelector('.ad-form');
   var mapFilters = document.querySelector('.map__filters');
+  var previewHousing = document.querySelector('.ad-form__photo');
 
   var resetForm = function () {
     form.reset();
     mapFilters.reset();
+    previewHousing.innerHTML = ' ';
   };
 
   var deletePins = function () {
@@ -86,8 +88,6 @@
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
     window.data.upload(new FormData(form), onSuccess, window.pin.onError);
-    // document.removeEventListener('click', onMessageCloseClick);
-    // document.removeEventListener('keydown', onButtonEscMessage);
   });
 
   window.reset = {
